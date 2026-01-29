@@ -35,7 +35,6 @@ const galleryImages = [
   "/images/pictures/IMG_9328.JPEG",
   "/images/pictures/18.jpg",
   "/images/pictures/19.jpg",
-  "/images/pictures/21.jpg",
   "/images/pictures/22.jpg",
   "/images/pictures/23.jpg",
   "/images/pictures/24.jpg",
@@ -90,7 +89,6 @@ export default function Gallery() {
               src={imgSrc}
               alt={`Gallery ${index + 1}`}
               className="gallery-image"
-              loading="lazy"
             />
           </div>
         ))}
@@ -102,7 +100,6 @@ export default function Gallery() {
             loop
             muted
             playsInline
-            loading="lazy"
           />
         </div>
         

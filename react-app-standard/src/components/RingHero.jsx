@@ -6,34 +6,55 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 export default function RingHero({
-  ringSrc = "/images/bg.gif",
+  ringSrc = "/images/bg.svg",
   videoSrc = "/images/video.mp4",
 }) {
   const imageRef = useRef(null);
   const titleLeftRef = useRef(null);
   const titleRightRef = useRef(null);
 
-  // Title animation on page load
+  // Title animation on page load: center → come together → move up; ring fades in during move
   useGSAP(() => {
-    // Initial state: title parts off-screen
+    // Video hidden until scroll
+    gsap.set(".hero-video", { opacity: 0 });
+    // Title wrapper starts at vertical center (horizontally centered)
+    gsap.set(".title-wrapper", { top: "50%", left: "50%", xPercent: -50, yPercent: -50 });
+    // Title parts off-screen for "come together" at center
     gsap.set(titleLeftRef.current, { x: "-30vw", opacity: 0 });
     gsap.set(titleRightRef.current, { x: "30vw", opacity: 0 });
-    gsap.set(".title-wrapper", { y: 0, opacity: 1 });
-    
-    // Animate title coming together from sides on page load
+    // Ring hidden until move-up
+    gsap.set(".ring-image", { opacity: 0 });
+
     const titleTl = gsap.timeline({ delay: 0.3 });
-    titleTl.to(titleLeftRef.current, {
-      x: 0,
-      opacity: 1,
-      duration: 2,
-      ease: "power2.out",
-    })
-    .to(titleRightRef.current, {
-      x: 0,
-      opacity: 1,
-      duration: 2,
-      ease: "power2.out",
-    }, "<1.2"); // Overlap the animations by 0.8 seconds
+    // Title comes together at center
+    titleTl
+      .to(titleLeftRef.current, {
+        x: 0,
+        opacity: 1,
+        duration: 2,
+        ease: "power2.out",
+      })
+      .to(
+        titleRightRef.current,
+        {
+          x: 0,
+          opacity: 1,
+          duration: 2,
+          ease: "power2.out",
+        },
+        "<1.2"
+      )
+      // Move title up to final position and fade in ring at the same time
+      .to(
+        ".title-wrapper",
+        { top: "15%", left: "50%", xPercent: -50, yPercent: -50, duration: 2, ease: "power2.inOut" },
+        "-=0.2"
+      )
+      .to(
+        ".ring-image",
+        { opacity: 1, duration: 3, ease: "power2.inOut" },
+        "<0.5"
+      );
   }, []);
 
   // Ring scroll animation
@@ -53,7 +74,10 @@ export default function RingHero({
           anticipatePin: 1,
         },
       });
-      
+
+      // Show video when scroll starts (it was hidden until now)
+      tl.to(".hero-video", { opacity: 1, duration: 0.3 }, 0);
+
       // Title exit animation: move up and fade out
       tl.fromTo(
         ".title-wrapper",
@@ -65,8 +89,9 @@ export default function RingHero({
           y: "-100vh",
           opacity: 0,
           duration: 0.3,
-          ease: "power2.in",
-        }
+          ease: "power2.inOut",
+        },
+        "<0.05"
       )
       // Then scale the ring
       .fromTo(
@@ -80,6 +105,16 @@ export default function RingHero({
           z: 300,
           transformOrigin: "center center",
           ease: "power1.inOut",
+        },
+        0.1
+      )
+      .fromTo(
+        ".ring-image",
+        {
+          backgroundColor: "#fffde9",
+        },
+        {
+          backgroundColor: "rgba(0, 0, 0, 0)",
         },
         0.1
       );
@@ -98,7 +133,10 @@ export default function RingHero({
           anticipatePin: 1,
         },
       });
-      
+
+      // Show video when scroll starts (it was hidden until now)
+      tl.to(".hero-video", { opacity: 1, duration: 0.3 }, 0);
+
       // Title exit animation: move up and fade out
       tl.fromTo(
         ".title-wrapper",

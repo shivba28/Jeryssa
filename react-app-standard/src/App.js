@@ -7,7 +7,7 @@ function App() {
   return (
     <div className="page">
       <RingHero
-        ringSrc="/images/bg.gif"
+        ringSrc="/images/bg.svg"
         videoSrc="/images/video.mp4"
       />
       <Gallery />
