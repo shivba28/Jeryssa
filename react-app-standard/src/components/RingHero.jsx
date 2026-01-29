@@ -173,7 +173,7 @@ export default function RingHero({
       </div>
       <div className="image-container">
         <div className="title-wrapper">
-          <span className="title-left" ref={titleLeftRef}>For Alyssa</span>
+          <span className="title-left" ref={titleLeftRef}>To Alyssa</span>
           <span className="title-right" ref={titleRightRef}>And Jeremiah</span>
         </div>
         <img className="ring-image" src={ringSrc} ref={imageRef} alt="Wedding ring" />
