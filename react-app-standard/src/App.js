@@ -1,5 +1,6 @@
 import React from 'react';
 import RingHero from './components/RingHero';
+import Gallery from "./components/Gallery";
 import './App.css';
 
 function App() {
@@ -9,11 +10,7 @@ function App() {
         ringSrc="/images/bg.gif"
         videoSrc="/images/video.mp4"
       />
-      
-      {/* Minimal continuation content so scrolling continues after the pinned phase */}
-      <main className="afterHero">
-        <div className="afterHero__spacer" />
-      </main>
+      <Gallery />
     </div>
   );
 }
