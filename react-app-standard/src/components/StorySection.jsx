@@ -64,7 +64,7 @@ function getRandomImagesWithRepeat(n) {
 }
 
 const LAYERS = [1, 2, 3];
-const IMAGES_PER_SLIDE = 5;
+const IMAGES_PER_SLIDE = 15;
 
 const storyPartsTemplate = [
   {
@@ -122,14 +122,32 @@ export default function StorySection() {
       const zoomInDuration = seg * 0.4;
       const zoomOutDuration = seg * 0.4;
 
-      gsap.set(".zoom-slide .zoom-slide-text", { z: -2000, opacity: 0 });
-      gsap.set(".zoom-slide .zoom-item", { z: -2000, opacity: 0 });
+      // Perspective zoom: start far (small scale, deep z), zoom in to viewer, then zoom out past viewer
+      const zFar = -2000;
+      const zNear = 600;
+      const zPast = 3200;
+      const scaleFar = 0.15;
+      const scaleNear = 1;
+      const scalePast = 2.2;
+
+      gsap.set(".zoom-slide .zoom-slide-text", {
+        xPercent: -50,
+        yPercent: -50,
+        z: zFar,
+        scale: scaleFar,
+        opacity: 0,
+      });
+      gsap.set(".zoom-slide .zoom-item", {
+        z: zFar,
+        scale: scaleFar,
+        opacity: 0,
+      });
 
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger,
           start: "top top",
-          end: "+=400%",
+          end: "+=800%",
           pin: true,
           scrub: 1,
           invalidateOnRefresh: true,
@@ -140,46 +158,97 @@ export default function StorySection() {
         const slideInStart = i * seg;
         const slideOutStart = (i + 1) * seg - zoomOutDuration;
 
+        // Text: zoom in from far, then zoom out past viewer
         tl.to(
           `.zoom-slide-${i} .zoom-slide-text`,
-          { z: 50, opacity: 1, duration: zoomInDuration, ease: "power1.inOut" },
+          {
+            z: 50,
+            scale: scaleNear,
+            opacity: 1,
+            duration: zoomInDuration,
+            ease: "power2.out",
+          },
           slideInStart
-        )
-          .to(
-            `.zoom-slide-${i} .zoom-slide-text`,
-            { z: 3200, opacity: 0, duration: zoomOutDuration, ease: "power1.in" },
-            slideOutStart
-          )
-          .to(
-            `.zoom-slide-${i} .zoom-item[data-layer="1"]`,
-            { z: 600, opacity: 1, duration: zoomInDuration, ease: "power1.inOut" },
-            slideInStart
-          )
-          .to(
-            `.zoom-slide-${i} .zoom-item[data-layer="1"]`,
-            { z: 3200, opacity: 0, duration: zoomOutDuration, ease: "power1.in" },
-            slideOutStart
-          )
-          .to(
-            `.zoom-slide-${i} .zoom-item[data-layer="2"]`,
-            { z: 900, opacity: 1, duration: zoomInDuration, ease: "power1.inOut" },
-            slideInStart
-          )
-          .to(
-            `.zoom-slide-${i} .zoom-item[data-layer="2"]`,
-            { z: 3200, opacity: 0, duration: zoomOutDuration, ease: "power1.in" },
-            slideOutStart
-          )
-          .to(
-            `.zoom-slide-${i} .zoom-item[data-layer="3"]`,
-            { z: 1200, opacity: 1, duration: zoomInDuration, ease: "power1.inOut" },
-            slideInStart
-          )
-          .to(
-            `.zoom-slide-${i} .zoom-item[data-layer="3"]`,
-            { z: 3200, opacity: 0, duration: zoomOutDuration, ease: "power1.in" },
-            slideOutStart
-          );
+        ).to(
+          `.zoom-slide-${i} .zoom-slide-text`,
+          {
+            z: zPast,
+            scale: scalePast,
+            opacity: 0,
+            duration: zoomOutDuration,
+            ease: "power2.in",
+          },
+          slideOutStart
+        );
+
+        // Layer 1 images
+        tl.to(
+          `.zoom-slide-${i} .zoom-item[data-layer="1"]`,
+          {
+            z: zNear,
+            scale: scaleNear,
+            opacity: 1,
+            duration: zoomInDuration,
+            ease: "power2.out",
+          },
+          slideInStart
+        ).to(
+          `.zoom-slide-${i} .zoom-item[data-layer="1"]`,
+          {
+            z: zPast,
+            scale: scalePast,
+            opacity: 0,
+            duration: zoomOutDuration,
+            ease: "power2.in",
+          },
+          slideOutStart
+        );
+
+        // Layer 2 images
+        tl.to(
+          `.zoom-slide-${i} .zoom-item[data-layer="2"]`,
+          {
+            z: zNear + 300,
+            scale: scaleNear,
+            opacity: 1,
+            duration: zoomInDuration,
+            ease: "power2.out",
+          },
+          slideInStart
+        ).to(
+          `.zoom-slide-${i} .zoom-item[data-layer="2"]`,
+          {
+            z: zPast,
+            scale: scalePast,
+            opacity: 0,
+            duration: zoomOutDuration,
+            ease: "power2.in",
+          },
+          slideOutStart
+        );
+
+        // Layer 3 images
+        tl.to(
+          `.zoom-slide-${i} .zoom-item[data-layer="3"]`,
+          {
+            z: zNear + 600,
+            scale: scaleNear,
+            opacity: 1,
+            duration: zoomInDuration,
+            ease: "power2.out",
+          },
+          slideInStart
+        ).to(
+          `.zoom-slide-${i} .zoom-item[data-layer="3"]`,
+          {
+            z: zPast,
+            scale: scalePast,
+            opacity: 0,
+            duration: zoomOutDuration,
+            ease: "power2.in",
+          },
+          slideOutStart
+        );
       }
     },
     { scope: zoomContainerRef, dependencies: [numSlides] }
