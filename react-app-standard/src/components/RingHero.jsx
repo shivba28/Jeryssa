@@ -132,8 +132,8 @@ export default function RingHero({
           y: "-100vh",
           opacity: 0,
           duration: 0.3,
-          ease: "power2.in",
-        }
+          ease: "power2.inOut",
+        }, "<0.05"
       )
       // Then scale the ring
       .fromTo(

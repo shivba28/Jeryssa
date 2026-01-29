@@ -16,6 +16,7 @@ function App() {
         ringSrc="/images/bg.svg"
         videoSrc="/images/video4K.mp4"
       />
+      <div className="story-section-spacer" aria-hidden="true" />
       <StorySection />
       <Gallery />
     </div>
