@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/Jeryssa/static/css/main.635bfdbc.css",
+    "main.js": "/Jeryssa/static/js/main.077a5178.js",
+    "index.html": "/Jeryssa/index.html",
+    "main.635bfdbc.css.map": "/Jeryssa/static/css/main.635bfdbc.css.map",
+    "main.077a5178.js.map": "/Jeryssa/static/js/main.077a5178.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.635bfdbc.css",
+    "static/js/main.077a5178.js"
+  ]
+}
