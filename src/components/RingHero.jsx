@@ -6,8 +6,8 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 export default function RingHero({
-  ringSrc = "/images/bg.svg",
-  videoSrc = "/images/video4K.mp4",
+  ringSrc = "/Jeryssa/images/bg.svg",
+  videoSrc = "/Jeryssa/images/video4K.mp4",
 }) {
   const imageRef = useRef(null);
   const titleLeftRef = useRef(null);

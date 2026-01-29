@@ -13,8 +13,8 @@ function App() {
   return (
     <div className="page">
       <RingHero
-        ringSrc="/images/bg.svg"
-        videoSrc="/images/video4K.mp4"
+        ringSrc="/Jeryssa/images/bg.svg"
+        videoSrc="/Jeryssa/images/video4K.mp4"
       />
       <div className="story-section-spacer" aria-hidden="true" />
       <StorySection />
