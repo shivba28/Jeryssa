@@ -45,7 +45,8 @@ export default function RingHero({
         .to(titleLeftRef.current, { x: 0, opacity: 1, duration: 2, ease: "power2.out" })
         .to(titleRightRef.current, { x: 0, opacity: 1, duration: 2, ease: "power2.out" }, "<1.2")
         .to(".title-wrapper", { top: "20%", xPercent: -50, yPercent: -50, duration: 1.5, ease: "power2.inOut" }, "-=0.2")
-        .to(".ring-image", { opacity: 1, duration: 1.5, ease: "power2.out" }, "<0");
+        .to(".ring-image", { opacity: 1, duration: 1.5, ease: "power2.out" }, "<0.75")
+        .to("section.hero", { backgroundColor: "#fffde9", duration: 1.5, ease: "power2.inOut" }, "-=2");
     });
 
     return () => md.revert();
