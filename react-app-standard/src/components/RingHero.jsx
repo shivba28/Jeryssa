@@ -19,7 +19,7 @@ export default function RingHero({
 
     md.add("(min-width: 401px)", () => {
       gsap.set(".hero-video", { opacity: 0 });
-      gsap.set(".title-wrapper", { top: "50%", left: "50%", xPercent: -50, yPercent: -50 });
+      gsap.set(".title-wrapper", { top: "50%", xPercent: -50, yPercent: -50 });
       gsap.set(titleLeftRef.current, { x: "-30vw", opacity: 0 });
       gsap.set(titleRightRef.current, { x: "30vw", opacity: 0 });
       gsap.set(".ring-image", { opacity: 0 });
@@ -28,13 +28,14 @@ export default function RingHero({
       titleTl
         .to(titleLeftRef.current, { x: 0, opacity: 1, duration: 2, ease: "power2.out" })
         .to(titleRightRef.current, { x: 0, opacity: 1, duration: 2, ease: "power2.out" }, "<1.2")
-        .to(".title-wrapper", { top: "15%", left: "50%", xPercent: -50, yPercent: -50, duration: 2, ease: "power2.inOut" }, "-=0.2")
-        .to(".ring-image", { opacity: 1, duration: 3, ease: "power2.inOut" }, "<0.5");
+        .to(".title-wrapper", { top: "15%", xPercent: -50, yPercent: -50, duration: 1.5, ease: "power2.inOut" }, "-=0.2")
+        .to(".ring-image", { opacity: 1, duration: 1.5, ease: "power2.inOut" }, "<0.5")
+        .to("section.hero", { backgroundColor: "#fffde9", duration: 1.5, ease: "power2.inOut" }, "-=1.5");
     });
 
     md.add("(max-width: 400px)", () => {
       gsap.set(".hero-video", { opacity: 0 });
-      gsap.set(".title-wrapper", { top: "50%", left: "50%", xPercent: -50, yPercent: -50 });
+      gsap.set(".title-wrapper", { top: "50%", xPercent: -50, yPercent: -50 });
       gsap.set(titleLeftRef.current, { x: "-30vw", opacity: 0 });
       gsap.set(titleRightRef.current, { x: "30vw", opacity: 0 });
       gsap.set(".ring-image", { opacity: 0 });
@@ -43,8 +44,8 @@ export default function RingHero({
       titleTl
         .to(titleLeftRef.current, { x: 0, opacity: 1, duration: 2, ease: "power2.out" })
         .to(titleRightRef.current, { x: 0, opacity: 1, duration: 2, ease: "power2.out" }, "<1.2")
-        .to(".title-wrapper", { top: "20%", left: "50%", xPercent: -50, yPercent: -50, duration: 2, ease: "power2.inOut" }, "-=0.2")
-        .to(".ring-image", { opacity: 1, duration: 3, ease: "power2.inOut" }, "<0.5");
+        .to(".title-wrapper", { top: "20%", xPercent: -50, yPercent: -50, duration: 1.5, ease: "power2.inOut" }, "-=0.2")
+        .to(".ring-image", { opacity: 1, duration: 1.5, ease: "power2.out" }, "<0");
     });
 
     return () => md.revert();
@@ -83,8 +84,7 @@ export default function RingHero({
           opacity: 0,
           duration: 0.3,
           ease: "power2.inOut",
-        },
-        "<0.05"
+        }, "<0.05"
       )
       // Then scale the ring
       .fromTo(
@@ -98,16 +98,6 @@ export default function RingHero({
           z: 300,
           transformOrigin: "center center",
           ease: "power1.inOut",
-        },
-        0.1
-      )
-      .fromTo(
-        ".ring-image",
-        {
-          backgroundColor: "#fffde9",
-        },
-        {
-          backgroundColor: "rgba(0, 0, 0, 0)",
         },
         0.1
       );
@@ -141,8 +131,8 @@ export default function RingHero({
           y: "-100vh",
           opacity: 0,
           duration: 0.3,
-          ease: "power2.inOut",
-        }, "<0.05"
+          ease: "power2.in",
+        }
       )
       // Then scale the ring
       .fromTo(
