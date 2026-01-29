@@ -8,7 +8,7 @@ function App() {
     <div className="page">
       <RingHero
         ringSrc="/images/bg.svg"
-        videoSrc="/images/video.mp4"
+        videoSrc="/images/video4K.mp4"
       />
       <Gallery />
     </div>

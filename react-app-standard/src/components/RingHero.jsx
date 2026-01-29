@@ -7,7 +7,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function RingHero({
   ringSrc = "/images/bg.svg",
-  videoSrc = "/images/video.mp4",
+  videoSrc = "/images/video4K.mp4",
 }) {
   const imageRef = useRef(null);
   const titleLeftRef = useRef(null);
@@ -15,46 +15,39 @@ export default function RingHero({
 
   // Title animation on page load: center → come together → move up; ring fades in during move
   useGSAP(() => {
-    // Video hidden until scroll
-    gsap.set(".hero-video", { opacity: 0 });
-    // Title wrapper starts at vertical center (horizontally centered)
-    gsap.set(".title-wrapper", { top: "50%", left: "50%", xPercent: -50, yPercent: -50 });
-    // Title parts off-screen for "come together" at center
-    gsap.set(titleLeftRef.current, { x: "-30vw", opacity: 0 });
-    gsap.set(titleRightRef.current, { x: "30vw", opacity: 0 });
-    // Ring hidden until move-up
-    gsap.set(".ring-image", { opacity: 0 });
+    const md = gsap.matchMedia();
 
-    const titleTl = gsap.timeline({ delay: 0.3 });
-    // Title comes together at center
-    titleTl
-      .to(titleLeftRef.current, {
-        x: 0,
-        opacity: 1,
-        duration: 2,
-        ease: "power2.out",
-      })
-      .to(
-        titleRightRef.current,
-        {
-          x: 0,
-          opacity: 1,
-          duration: 2,
-          ease: "power2.out",
-        },
-        "<1.2"
-      )
-      // Move title up to final position and fade in ring at the same time
-      .to(
-        ".title-wrapper",
-        { top: "15%", left: "50%", xPercent: -50, yPercent: -50, duration: 2, ease: "power2.inOut" },
-        "-=0.2"
-      )
-      .to(
-        ".ring-image",
-        { opacity: 1, duration: 3, ease: "power2.inOut" },
-        "<0.5"
-      );
+    md.add("(min-width: 401px)", () => {
+      gsap.set(".hero-video", { opacity: 0 });
+      gsap.set(".title-wrapper", { top: "50%", left: "50%", xPercent: -50, yPercent: -50 });
+      gsap.set(titleLeftRef.current, { x: "-30vw", opacity: 0 });
+      gsap.set(titleRightRef.current, { x: "30vw", opacity: 0 });
+      gsap.set(".ring-image", { opacity: 0 });
+
+      const titleTl = gsap.timeline({ delay: 0.3 });
+      titleTl
+        .to(titleLeftRef.current, { x: 0, opacity: 1, duration: 2, ease: "power2.out" })
+        .to(titleRightRef.current, { x: 0, opacity: 1, duration: 2, ease: "power2.out" }, "<1.2")
+        .to(".title-wrapper", { top: "15%", left: "50%", xPercent: -50, yPercent: -50, duration: 2, ease: "power2.inOut" }, "-=0.2")
+        .to(".ring-image", { opacity: 1, duration: 3, ease: "power2.inOut" }, "<0.5");
+    });
+
+    md.add("(max-width: 400px)", () => {
+      gsap.set(".hero-video", { opacity: 0 });
+      gsap.set(".title-wrapper", { top: "50%", left: "50%", xPercent: -50, yPercent: -50 });
+      gsap.set(titleLeftRef.current, { x: "-30vw", opacity: 0 });
+      gsap.set(titleRightRef.current, { x: "30vw", opacity: 0 });
+      gsap.set(".ring-image", { opacity: 0 });
+
+      const titleTl = gsap.timeline({ delay: 0.3 });
+      titleTl
+        .to(titleLeftRef.current, { x: 0, opacity: 1, duration: 2, ease: "power2.out" })
+        .to(titleRightRef.current, { x: 0, opacity: 1, duration: 2, ease: "power2.out" }, "<1.2")
+        .to(".title-wrapper", { top: "20%", left: "50%", xPercent: -50, yPercent: -50, duration: 2, ease: "power2.inOut" }, "-=0.2")
+        .to(".ring-image", { opacity: 1, duration: 3, ease: "power2.inOut" }, "<0.5");
+    });
+
+    return () => md.revert();
   }, []);
 
   // Ring scroll animation
@@ -148,8 +141,8 @@ export default function RingHero({
           y: "-100vh",
           opacity: 0,
           duration: 0.3,
-          ease: "power2.in",
-        }
+          ease: "power2.inOut",
+        }, "<0.05"
       )
       // Then scale the ring
       .fromTo(
