@@ -6,8 +6,8 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 export default function RingHero({
-  ringSrc = "/images/bg.gif",
-  videoSrc = "/images/video.mp4",
+  ringSrc = "/images/bg.svg",
+  videoSrc = "/images/video4K.mp4",
 }) {
   const imageRef = useRef(null);
   const titleLeftRef = useRef(null);
@@ -28,8 +28,9 @@ export default function RingHero({
       titleTl
         .to(titleLeftRef.current, { x: 0, opacity: 1, duration: 2, ease: "power2.out" })
         .to(titleRightRef.current, { x: 0, opacity: 1, duration: 2, ease: "power2.out" }, "<1.2")
-        .to(".title-wrapper", { top: "10%", xPercent: -50, yPercent: -50, duration: 1.5, ease: "power2.inOut" }, "-=0.2")
-        .to(".ring-image", { opacity: 1, duration: 1.5, ease: "power2.out" }, "<0");
+        .to(".title-wrapper", { top: "15%", xPercent: -50, yPercent: -50, duration: 1.5, ease: "power2.inOut" }, "-=0.2")
+        .to(".ring-image", { opacity: 1, duration: 1.5, ease: "power2.inOut" }, "<0.5")
+        .to("section.hero", { backgroundColor: "#fffde9", duration: 1.5, ease: "power2.inOut" }, "-=1.5");
     });
 
     md.add("(max-width: 400px)", () => {
@@ -44,7 +45,8 @@ export default function RingHero({
         .to(titleLeftRef.current, { x: 0, opacity: 1, duration: 2, ease: "power2.out" })
         .to(titleRightRef.current, { x: 0, opacity: 1, duration: 2, ease: "power2.out" }, "<1.2")
         .to(".title-wrapper", { top: "20%", xPercent: -50, yPercent: -50, duration: 1.5, ease: "power2.inOut" }, "-=0.2")
-        .to(".ring-image", { opacity: 1, duration: 1.5, ease: "power2.out" }, "<0");
+        .to(".ring-image", { opacity: 1, duration: 1.5, ease: "power2.out" }, "<0.75")
+        .to("section.hero", { backgroundColor: "#fffde9", duration: 1.5, ease: "power2.inOut" }, "-=2");
     });
 
     return () => md.revert();
@@ -82,8 +84,8 @@ export default function RingHero({
           y: "-100vh",
           opacity: 0,
           duration: 0.3,
-          ease: "power2.in",
-        }
+          ease: "power2.inOut",
+        }, "<0.05"
       )
       // Then scale the ring
       .fromTo(
@@ -130,8 +132,8 @@ export default function RingHero({
           y: "-100vh",
           opacity: 0,
           duration: 0.3,
-          ease: "power2.in",
-        }
+          ease: "power2.inOut",
+        }, "<0.05"
       )
       // Then scale the ring
       .fromTo(
@@ -171,7 +173,7 @@ export default function RingHero({
       </div>
       <div className="image-container">
         <div className="title-wrapper">
-          <span className="title-left" ref={titleLeftRef}>For Alyssa</span>
+          <span className="title-left" ref={titleLeftRef}>To Alyssa</span>
           <span className="title-right" ref={titleRightRef}>And Jeremiah</span>
         </div>
         <img className="ring-image" src={ringSrc} ref={imageRef} alt="Wedding ring" />
