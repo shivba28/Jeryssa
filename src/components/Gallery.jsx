@@ -4,7 +4,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const videoSrc = "/images/pictures/39.mov";
+const videoSrc = "/Jeryssa/images/pictures/39.mov";
 // List of available images (including HEIC files)
 const galleryImages = [
   "/Jeryssa/images/pictures/1.jpg",

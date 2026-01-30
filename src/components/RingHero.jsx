@@ -17,7 +17,7 @@ export default function RingHero({
   useGSAP(() => {
     const md = gsap.matchMedia();
 
-    md.add("(min-width: 401px)", () => {
+    md.add("(min-width: 451px)", () => {
       gsap.set(".hero-video", { opacity: 0 });
       gsap.set(".title-wrapper", { top: "50%", xPercent: -50, yPercent: -50 });
       gsap.set(titleLeftRef.current, { x: "-30vw", opacity: 0 });
@@ -33,7 +33,7 @@ export default function RingHero({
         .to("section.hero", { backgroundColor: "#fffde9", duration: 1.5, ease: "power2.inOut" }, "-=1.5");
     });
 
-    md.add("(max-width: 400px)", () => {
+    md.add("(max-width: 450px)", () => {
       gsap.set(".hero-video", { opacity: 0 });
       gsap.set(".title-wrapper", { top: "50%", xPercent: -50, yPercent: -50 });
       gsap.set(titleLeftRef.current, { x: "-30vw", opacity: 0 });
@@ -57,7 +57,7 @@ export default function RingHero({
     const md = gsap.matchMedia();
     
     // Desktop: scale to 50
-    md.add("(min-width: 401px)", () => {
+    md.add("(min-width: 451px)", () => {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: ".scroll-wrapper",
@@ -105,7 +105,7 @@ export default function RingHero({
     });
 
     // Mobile: scale to 50
-    md.add("(max-width: 400px)", () => {
+    md.add("(max-width: 450px)", () => {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: ".scroll-wrapper",
